@@ -61,9 +61,9 @@ git status --short
 
 將執行的指令：
 
-git worktree add ../project-hero feature/hero-redesign
-git worktree add ../project-pricing feature/pricing-page
-git worktree add ../project-testimonials feature/testimonials
+git worktree add -b feature/hero-redesign ../project-hero
+git worktree add -b feature/pricing-page ../project-pricing
+git worktree add -b feature/testimonials ../project-testimonials
 
 確認執行？(Y/n)
 ```
@@ -77,8 +77,8 @@ git worktree add ../project-testimonials feature/testimonials
 使用者確認後，依序執行：
 
 ```bash
-# 建立各 worktree
-git worktree add <worktree_path> <branch_name>
+# 建立各 worktree（新分支）
+git worktree add -b <branch_name> <worktree_path>
 ```
 
 #### Worktree 目錄命名規則
@@ -140,7 +140,7 @@ git worktree list
 
 ## 邊界情況處理
 
-- **分支已存在**：提示使用者是否基於既有分支建立 worktree（`git worktree add <path> <existing-branch>`）
+- **分支已存在**：偵測到分支已存在時，改用不帶 `-b` 的指令（`git worktree add <path> <existing-branch>`），並提示使用者確認
 - **目錄已存在**：提示衝突並建議替代目錄名
 - **有未提交變更**：提醒先 commit 或 stash
 - **遠端分支同步**：建議先 `git fetch` 取得最新遠端狀態
